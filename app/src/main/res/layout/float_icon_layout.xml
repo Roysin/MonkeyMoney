@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/float_icon_width"
+    android:layout_height="@dimen/float_icon_height">
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/float_icon_width"
+        android:layout_height="@dimen/float_icon_width"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:src ="@drawable/lucky_money_icon"/>
+
+    <TextView
+        android:id="@+id/msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/msg_count"/>
+
+    <TextView
+        android:id="@+id/msg_sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:singleLine="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/msg_sender"/>
+
+
+</RelativeLayout>
