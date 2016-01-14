@@ -95,10 +95,15 @@ public class RobMoneyService extends NotificationListenerService {
     }
 
     @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        LogUtils.log(TAG,"onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
     public void onCreate() {
         LogUtils.log(TAG,"onCreate ");
         mIconManager = new IconManager(this);
-//        mLuckyMoneyListeners = new ArrayList<IconManager.LuckyMoneyListener>();
         lmhelper = LuckyMoneyHelper.getInstace();
         super.onCreate();
     }
@@ -131,4 +136,5 @@ public class RobMoneyService extends NotificationListenerService {
             mLuckyMoneyListeners.remove(l);
         }
     }
+
 }

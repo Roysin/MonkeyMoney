@@ -196,8 +196,8 @@ public class IconManager  {
 
 
     public  interface LuckyMoneyListener {
-        public void onLuckyMoneyArrived( ItemInfo info );
-        public void onLuckyMoneyRemoved( ItemInfo info );
+         void onLuckyMoneyArrived( ItemInfo info );
+         void onLuckyMoneyRemoved( ItemInfo info );
     }
 
     private class IconAdapter extends BaseAdapter {
