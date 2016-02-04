@@ -6,4 +6,6 @@
     <string name="start_service">开始抢红包服务</string>
     <string name="msg_sender">用户名</string>
     <string name="msg_count">1</string>
+    <string name="Title">微信红包提醒</string>
+    <string name="alert_content">单击抢红包</string>
 </resources>

@@ -1,6 +1,7 @@
 package org.roysin.luckymoney;
 
 import android.annotation.SuppressLint;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.util.Log;
 
 import org.roysin.luckymoney.utils.LogUtils;
 import org.roysin.luckymoney.utils.LuckyMoneyHelper;
@@ -64,9 +66,20 @@ public class RobMoneyService extends NotificationListenerService {
     private void notifyLuckyMoneyArrived(ItemInfo info) {
         LogUtils.log(TAG,"notifyLuckyMoneyArrived");
         if(mLuckyMoneyListeners != null){
-            for(IconManager.LuckyMoneyListener l : mLuckyMoneyListeners){
+            KeyguardManager mKeyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            if (!mKeyguardManager.inKeyguardRestrictedInputMode()) {//check if the screen is off,if it's off,wake it up.
+                Log.i(TAG, "get lucky Money when screen on.");
+                for (IconManager.LuckyMoneyListener l : mLuckyMoneyListeners) {
+                    ItemInfo itemInfo = new ItemInfo(info);
+                    l.onLuckyMoneyArrived(itemInfo);
+                }
+            } else {
+                Log.i(TAG, "get lucky Money when screen off.");
+                Intent intentAlert = new Intent(this, LockedIconManager.class);
                 ItemInfo itemInfo = new ItemInfo(info);
-                l.onLuckyMoneyArrived(itemInfo);
+                intentAlert.putExtra("pendingIntent",itemInfo.pendingIntent);
+                intentAlert.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                this.startActivity(intentAlert);
             }
         }
     }
